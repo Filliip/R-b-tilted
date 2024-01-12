@@ -1,10 +1,47 @@
 import { Enemy } from "./ui/enities.js";
 import { Background } from "./ui/basic-ui.js";
-const bobo = new Enemy("jozek", 50, 1);
+const battleBus = new Enemy("battleBus", 50, 1, 0, 50, 300);
+const fnkid = new Enemy("fn kid", 50, 1, 2, 50, 100 );
 const background = new Background();
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+
+const gameLoop = () => {
+  clear();
+
+  update();
+
+  render();
+
+  fps();
+  window.requestAnimationFrame(gameLoop);
+};
+
+const enemy = {
+  hp: 100,
+  name: "Enemy 1",
+  dmg: 12,
+};
+
+const clear = () => {
+  canvas.width = 1280;
+  canvas.height = 720;
+  background.draw(ctx);
+};
+const update = () => {
+  battleBus.update();
+  fnkid.update();
+};
+const render = () => {
+  battleBus.draw(ctx);
+  fnkid.draw(ctx)
+};
+const fps = () => {};
+
+window.onload = () => {
+  window.requestAnimationFrame(gameLoop);
+};
 //const battleBus = new Image();
 //battleBus.src = "./res/img/battle_bus.png";
 
@@ -104,32 +141,3 @@ const ctx = canvas.getContext("2d");
 //     1
 //   );
 // };
-
-const gameLoop = () => {
-  clear();
-
-  update();
-
-  render();
-
-  fps();
-};
-
-const enemy = {
-  hp: 100,
-  name: "Enemy 1",
-  dmg: 12,
-};
-
-const clear = () => {
-  canvas.width = 1280;
-  canvas.height = 720;
-  background.draw(ctx);
-};
-const update = () => {};
-const render = () => {};
-const fps = () => {};
-
-window.onload = () => {
-  window.requestAnimationFrame(gameLoop);
-};
